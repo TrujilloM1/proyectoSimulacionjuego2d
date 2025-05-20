@@ -1,0 +1,50 @@
+# === UNITY IGNORE FILE ===
+
+# Carpetas que Unity recrea automáticamente
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]serSettings/
+MemoryCaptures/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de VS/MonoDevelop/JetBrains Rider
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+
+.vs/
+.idea/
+*.code-workspace
+
+# Archivos relacionados con configuraciones personales
+*.swp
+*.bak
+*.orig
+*.log
+
+# Archivos de Unity Cloud Build
+*.apk
+*.aab
+*.ipa
+*.xcodeproj
+*.xcworkspace
+*.xcuserdata/
+
+# Otros
+*.tmproj
+*.tmTheme
