@@ -12,12 +12,22 @@ public class Lanzador : MonoBehaviour
     public float velocidadMinima = 0.05f;
     public float groundY = -3f; // altura del suelo
 
+    [Header("Colisión con tablero")]
+    public Transform tablero;           // Asigna el objeto "Tablero" desde el Inspector
+    public float anchoTablero = 0.5f;   // Mitad del ancho del tablero
+    public float altoTablero = 1.5f;    // Mitad del alto del tablero
+    public float radioPelota = 0.25f;   // Tamaño de la pelota
+    public float reboteTablero = 0.6f;  // Rebote horizontal
+
     private Vector2 posicion;
     private bool enMovimiento = true;
 
     void Start()
     {
         posicion = transform.position;
+        velocidad = Vector2.zero;
+        enMovimiento = false;
+        transform.position = posicion;
     }
 
     void Update()
@@ -37,6 +47,57 @@ public class Lanzador : MonoBehaviour
                 posicion.y = groundY;
                 velocidad.y *= -0.6f;       // rebote vertical
                 velocidad.x *= 0.9f;        // fricción
+            }
+
+            // Colisión con el tablero (tipo cuadrado)
+            if (tablero != null)
+            {
+                Vector2 posPelota = posicion;
+                Vector2 posTablero = tablero.position;
+
+                float dx = Mathf.Abs(posPelota.x - posTablero.x);
+                float dy = Mathf.Abs(posPelota.y - posTablero.y);
+
+                bool colisionX = dx < (anchoTablero + radioPelota);
+                bool colisionY = dy < (altoTablero + radioPelota);
+
+                if (colisionX && colisionY)
+                {
+                    Debug.Log("Colisión con el tablero");
+
+                    float overlapX = (anchoTablero + radioPelota) - dx;
+                    float overlapY = (altoTablero + radioPelota) - dy;
+
+                    if (overlapX > overlapY)
+                    {
+                        // Rebote vertical
+                        if (posPelota.y > posTablero.y)
+                        {
+                            posicion.y = posTablero.y + altoTablero + radioPelota;
+                        }
+                        else
+                        {
+                            posicion.y = posTablero.y - altoTablero - radioPelota;
+                        }
+
+                        velocidad.y *= -reboteTablero;
+                    }
+                    else
+                    {
+                        // Rebote horizontal
+                        if (posPelota.x > posTablero.x)
+                        {
+                            posicion.x = posTablero.x + anchoTablero + radioPelota;
+                        }
+                        else
+                        {
+                            posicion.x = posTablero.x - anchoTablero - radioPelota;
+                        }
+
+                        velocidad.x *= -reboteTablero;
+                    }
+                }
+
             }
 
             // Detener si la velocidad es muy baja
