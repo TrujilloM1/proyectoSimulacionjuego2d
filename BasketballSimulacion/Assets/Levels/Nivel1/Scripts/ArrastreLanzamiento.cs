@@ -3,54 +3,56 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class ArrastreLanzamiento : MonoBehaviour
 {
-    public float fuerzaMaxima = 10f;
-    public Lanzador lanzador;
+    public float powerFactor = 5f;         // Multiplica la distancia arrastrada para obtener potencia
+    public Lanzador lanzador;              // Referencia al script de movimiento
+    public LineRenderer linea;             // Línea que muestra dirección
 
     private bool arrastrando = false;
     private Vector2 puntoInicio;
-    private Camera cam;
-    private LineRenderer linea;
 
     void Start()
     {
-        cam = Camera.main;
-        linea = GetComponent<LineRenderer>();
+        if (linea == null)
+            linea = GetComponent<LineRenderer>();
+
         linea.positionCount = 2;
         linea.enabled = false;
     }
 
     void OnMouseDown()
     {
-        puntoInicio = cam.ScreenToWorldPoint(Input.mousePosition);
-        arrastrando = true;
-        linea.enabled = true;
+        if (lanzador != null && lanzador.GetVelocidad() == Vector2.zero)
+        {
+            puntoInicio = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            arrastrando = true;
+            linea.enabled = true;
+        }
     }
 
     void OnMouseDrag()
     {
         if (!arrastrando) return;
 
-        Vector2 puntoActual = cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 puntoActual = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direccion = puntoInicio - puntoActual;
-        float magnitud = Mathf.Min(direccion.magnitude, fuerzaMaxima);
-        Vector2 fuerza = direccion.normalized * magnitud;
 
+        // Mostrar línea guía
         linea.SetPosition(0, transform.position);
-        linea.SetPosition(1, (Vector2)transform.position + fuerza);
+        linea.SetPosition(1, (Vector2)transform.position + direccion);
     }
 
     void OnMouseUp()
     {
         if (!arrastrando) return;
 
+        Vector2 puntoFinal = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direccion = puntoInicio - puntoFinal;
+
+        Vector2 velocidad = direccion * powerFactor;
+
+        lanzador.ActualizarVelocidad(velocidad);
+
         arrastrando = false;
         linea.enabled = false;
-
-        Vector2 puntoFinal = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direccion = puntoInicio - puntoFinal;
-        float magnitud = Mathf.Min(direccion.magnitude, fuerzaMaxima);
-        Vector2 fuerza = direccion.normalized * magnitud;
-
-        lanzador.ActualizarVelocidad(fuerza);
     }
 }
