@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class Lanzador : MonoBehaviour
 {
+    [Header("Zona de canasta")]
+    public bool haAnotado = false;
+    public int puntos = 0;
+
+
     [Header("Límites del área de juego")]
     public float limiteIzquierdo = -8f;
     public float limiteDerecho = 8f;
@@ -131,11 +136,7 @@ public class Lanzador : MonoBehaviour
 
     }
 
-    public void ActualizarVelocidad(Vector2 nuevaVelocidad)
-    {
-        velocidad = nuevaVelocidad;
-        enMovimiento = true;
-    }
+  
 
     public Vector2 GetVelocidad()
     {
@@ -155,4 +156,25 @@ public class Lanzador : MonoBehaviour
         velocidad = new Vector2(6f, 8f); // o alguna velocidad predeterminada
         enMovimiento = true;
     }
+    public void RegistrarPunto()
+    {
+        if (!haAnotado)
+        {
+            puntos++;
+            haAnotado = true;
+            Debug.Log("¡Canasta! Puntos: " + puntos);
+        }
+    }
+    public void ActualizarVelocidad(Vector2 nuevaVelocidad)
+    {
+        velocidad = nuevaVelocidad;
+        enMovimiento = true;
+        haAnotado = false;
+    }
+    public int GetPuntos()
+    {
+        return puntos;
+    }
+
+
 }
