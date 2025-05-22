@@ -1213,9 +1213,14 @@ SceneRoots:
   - {fileID: 1416514997}
   - {fileID: 786426955}
   - {fileID: 1694068180}
+<<<<<<< HEAD
 <<<<<<< HEAD:BasketballSimulacion/Assets/Levels/Nivel1/Nivel1.unity
   - {fileID: 1260628113}
 =======
   - {fileID: 1717095849}
   - {fileID: 111461673}
 >>>>>>> 575301f3e38920a459f855cfa326d0b41af6efb7:BasketballSimulacion/Assets/Scenes/Nivel1/Nivel1.unity
+=======
+  - {fileID: 1717095849}
+  - {fileID: 111461673}
+>>>>>>> 575301f3e38920a459f855cfa326d0b41af6efb7
