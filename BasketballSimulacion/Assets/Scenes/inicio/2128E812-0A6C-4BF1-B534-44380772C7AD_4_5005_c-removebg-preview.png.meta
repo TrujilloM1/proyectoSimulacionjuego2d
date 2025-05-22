@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 661cd747532b84b43977b913a87194fc
+guid: 2bf9a7c50f80343988aae8d1296ad37d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4810488660336404380
-    second: pelota_0
+      213: 2799002375302196582
+    second: 2128E812-0A6C-4BF1-B534-44380772C7AD_4_5005_c-removebg-preview_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pelota_0
+      name: 2128E812-0A6C-4BF1-B534-44380772C7AD_4_5005_c-removebg-preview_0
       rect:
         serializedVersion: 2
-        x: 164
-        y: 175
-        width: 699
-        height: 698
+        x: 0
+        y: 25
+        width: 155
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c97656313f942c240800000000000000
-      internalID: 4810488660336404380
+      spriteID: 66dac51a4dd08d620800000000000000
+      internalID: 2799002375302196582
       vertices: []
       indices: 
       edges: []
